@@ -1,0 +1,63 @@
+договор
+id договора 
+номер договра 
+дата заключния 
+
+
+
+
+
+
+
+заказчик 
+айди заказчика
+ФИО 
+адрес 
+телефон 
+
+
+
+
+
+CREATE TABLE Товары 
+(
+    Код_товара INTEGER PRIMARY KEY,
+    Наименование_товара VARCHAR(255),
+    Цена_товара DECIMAL(10,2),
+    Количество_товара INTEGER
+);
+
+CREATE TABLE Отгрузки_товаров 
+(
+    Код_отгрузки INTEGER PRIMARY KEY,
+    Код_заказа INTEGER FOREIGN KEY REFERENCES Заказы_на_поставку(Код_заказа),
+    Дата_отгрузки DATE,
+    Отгружено_товара INTEGER
+);
+
+CREATE TABLE Заказчик 
+(
+	Код_Заказчика INTEGER PRIMARY KEY,
+	ФИО_заказчика VARCHAR(255) FOREIGN KEY REFERENCES Заказы_на_поставку(ФИО_заказчика),
+    Адрес_заказчика VARCHAR(255),
+    Телефон_заказчика VARCHAR(20),
+);
+
+CREATE TABLE Договор 
+(
+    Номер_договора VARCHAR(255) PRIMARY KEY FOREIGN KEY REFERENCES Заказы_на_поставку(Номер_договора),
+    Дата_заключения_договора DATE,
+);
+
+CREATE TABLE Заказы_на_поставку 
+(
+    Код_заказа INTEGER PRIMARY KEY,
+    ФИО_заказчика VARCHAR(255),
+    Номер_договора VARCHAR(255),
+    Наименование_товара VARCHAR(255),
+    Плановая_поставка INTEGER
+);
+
+
+
+
